@@ -1,6 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,12 +13,20 @@ public class Garage {
     private ArrayList<Vehicle> vehicles;
     private Protocol_Garage protocolGarage;
 
-    public Garage(Protocol_Garage protocolGarage, ArrayList<Vehicle> vehicles) {
+    public Garage(Protocol_Garage protocolGarage) {
         this.protocolGarage = protocolGarage;
-        this.vehicles = vehicles;
     }
 
-    public void start() {
+    public void start(HashMap<DB.Type, PriorityQueue<Vehicle>> vehicleMap) {
+        vehicles = new ArrayList<>();
+
+        PriorityQueue<Vehicle> motorcycles = vehicleMap.get(DB.Type.MOTORCYCLE);
+        vehicles.addAll(motorcycles);
+        PriorityQueue<Vehicle> cars = vehicleMap.get(DB.Type.CAR);
+        vehicles.addAll(cars);
+        PriorityQueue<Vehicle> trucks = vehicleMap.get(DB.Type.TRUCK);
+        vehicles.addAll(trucks);
+
         String timeStamp = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         System.out.println(timeStamp);
         Runnable runnable = new Runnable() {

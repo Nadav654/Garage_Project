@@ -13,4 +13,8 @@ public class Truck extends Vehicle {
     public int getFixTime() {
         return 10;
     }
+
+    public static Truck build(String model) {
+        return new Truck(model);
+    }
 }

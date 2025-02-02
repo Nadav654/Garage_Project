@@ -1,4 +1,4 @@
-public abstract class Vehicle implements Fixable{
+public abstract class Vehicle implements Fixable, Comparable<Vehicle>{
     private String name;
 
     public Vehicle(String name) {
@@ -14,4 +14,9 @@ public abstract class Vehicle implements Fixable{
     }
 
     public abstract int getFixTime();
+
+    @Override
+    public int compareTo(Vehicle other) {
+        return Integer.compare(this.getFixTime(), other.getFixTime());
+    }
 }

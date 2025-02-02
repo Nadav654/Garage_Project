@@ -13,4 +13,8 @@ public class Motorcycle extends Vehicle {
     public int getFixTime() {
         return 3;
     }
+
+    public static Motorcycle build(String model) {
+        return new Motorcycle(model);
+    }
 }
